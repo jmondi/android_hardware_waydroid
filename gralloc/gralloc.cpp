@@ -115,8 +115,6 @@ static int gbm_mod_perform(const struct gralloc_module_t *mod, int op, ...)
 	struct cros_gralloc0_buffer_info *info;
 	struct gralloc_handle_t *hnd;
 
-	ALOGV("		%s\n\n", __func__);
-
 	err = gbm_init(dmod);
 	if (err)
 		return err;
@@ -193,7 +191,7 @@ static int gbm_mod_lock(const gralloc_module_t *mod, buffer_handle_t handle,
 	pthread_mutex_lock(&dmod->mutex);
 
 	err = gralloc_gbm_bo_lock(handle, usage, x, y, w, h, ptr);
-	ALOGV("%s buffer %p lock usage = %08x", __func__, handle, usage);
+	ALOGV("buffer %p lock usage = %08x", handle, usage);
 
 	pthread_mutex_unlock(&dmod->mutex);
 	return err;
@@ -217,7 +215,6 @@ static int gbm_mod_lock_ycbcr(gralloc_module_t const *mod, buffer_handle_t handl
 	struct gbm_module_t *dmod = (struct gbm_module_t *) mod;
 	int err;
 
-	ALOGV("		%s\n\n", __func__);
 	pthread_mutex_lock(&dmod->mutex);
 	err = gralloc_gbm_bo_lock_ycbcr(handle, usage, x, y, w, h, ycbcr);
 	pthread_mutex_unlock(&dmod->mutex);
@@ -262,7 +259,7 @@ static int gbm_mod_alloc_gpu0(alloc_device_t *dev,
 	if (!*handle)
 		err = -errno;
 
-	ALOGV("%s buffer %p usage = %08x", __func__, *handle, usage);
+	ALOGV("buffer %p usage = %08x", *handle, usage);
 	pthread_mutex_unlock(&dmod->mutex);
 	return err;
 }
